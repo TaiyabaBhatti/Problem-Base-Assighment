@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 public class Main {
 
-    public static String fileName="D:\\3RD SEMESTER\\DSA\\crop_production.csv";
+    public static String fileName="D:\\3RD SEMESTER\\DSA\\Example.csv";
     static String  stateName="Andhra pradesh";
     static Queue queuebase=new Queue();
     public static void main(String[] args) throws IOException {
