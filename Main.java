@@ -8,31 +8,14 @@ import java.util.LinkedList;
 
 public class Main {
 
-    public static String fileName="D:\\3RD SEMESTER\\DSA\\Example.csv";
-    static String  stateName="Andaman and Nicobar Islands";
+    public static String fileName="D:\\3RD SEMESTER\\DSA\\crop_production.csv";
+    static String  stateName="Andhra Pradesh";
     static Queue queuebase=new Queue();
     public static void main(String[] args) throws IOException {
-int count=1;
            LinkedList<StateData> stateDataLinkedList=readCsv();
-//        System.out.println("Overall Data");
-//           for (StateData state:stateDataLinkedList){
-//              for (CropData cropData:state.cropDataLinkedList){
-////                  System.out.println("Name :"+cropData.cropName+"\t\t\t District :"+cropData.district);
-//                  count++;
-//                  System.out.println("No: "+count+" -> " +cropData.state +" year: "+cropData.cropYear);
-//              }
-//          }
 
-//        System.out.println("Crop data for specific state:"+stateName);
-//          queuebase.forwardTraversing();
 
-//        System.out.println("Stack");
-//         for (StateData stateData:stateDataLinkedList) {
-//             stateData.countingStack.sortStack();
-//             System.out.println("State name: " + stateData.stateName);
-//             stateData.countingStack.displayStack();
-//         }
-
+      //Problem 3: Find the most recent and oldest crop of ‘Andhra Pradesh’ state.
         for (StateData stateData:stateDataLinkedList) {
             if (stateData.stateName.equalsIgnoreCase(stateName)){
                  recentOldestCrop(stateData);
@@ -40,26 +23,11 @@ int count=1;
             }
         }
 
+        //2-problem -> Which state is popular for which type of crop?
+        popularState(stateDataLinkedList);
 
-
-
-//        System.out.println(" On year Basis\n\n\n\n\n\n");
-//
-//
-////        2-problem -> Which state is popular for which type of crop?
-////        popularState(stateDataLinkedList);
-//
-//        //Problem 1: How to find the most popular crop in a particular year.
-//        popularStateInParticularYear(stateDataLinkedList,2010);
-
-
-
-
-
-
-
-
-
+        //Problem 1: How to find the most popular crop in a particular year.
+        popularStateInParticularYear(stateDataLinkedList,2010);
 
     }
 
@@ -161,25 +129,16 @@ while(!tempcountingStack.isEmpty()){
         }
     }
        public static void recentOldestCrop(StateData state){
-          int oldestYear=0, recentYear=0;
 
-          for (CropData crop:state.cropDataLinkedList){
-              if (oldestYear==0){
-                  oldestYear=crop.cropYear;
-              }
-              if (recentYear==0){
-                  recentYear=crop.cropYear;
-              }
-              if (oldestYear< crop.cropYear){
-                  recentYear= crop.cropYear;
-              }
-          }
+         int oldestYear=state.cropDataLinkedList.getFirst().cropYear;
+          int recentYear=state.cropDataLinkedList.getLast().cropYear;
+
            System.out.println("Oldest year: "+oldestYear);
            System.out.println("Recent year: "+recentYear);
-           String district=null;
+
            ArrayList<String> cropoldest=new ArrayList<>();
            ArrayList<String> croprecent=new ArrayList<>();
-           boolean status=false;
+
            for (CropData crop:state.cropDataLinkedList) {
                if (crop.cropYear == oldestYear) {
                    cropoldest.add(crop.cropName);
@@ -189,12 +148,8 @@ while(!tempcountingStack.isEmpty()){
                }
 
            }
-
            System.out.println("Oldest: "+ cropoldest);
            System.out.println("Recent: "+croprecent);
-
-
-
 
     }
 
