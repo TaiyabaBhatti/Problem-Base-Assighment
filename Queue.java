@@ -107,7 +107,6 @@ private NodeCrop head=new NodeCrop(null);  //dummy node
 }
 
 class NodeCrop{
-
      public NodeCrop next=this;        //next should be Node
      public NodeCrop previous=this;      //previous should be node
      public CropData data;
@@ -118,7 +117,6 @@ class NodeCrop{
           this.data=data;
           this.next=next;
      }
-
      public NodeCrop(CropData data, NodeCrop previous, NodeCrop next){
           this.data=data;
           this.previous=previous;

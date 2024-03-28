@@ -1,38 +1,67 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Main {
 
     public static String fileName="D:\\3RD SEMESTER\\DSA\\Example.csv";
-    static String  stateName="Andhra pradesh";
+    static String  stateName="Andaman and Nicobar Islands";
     static Queue queuebase=new Queue();
     public static void main(String[] args) throws IOException {
-
+int count=1;
            LinkedList<StateData> stateDataLinkedList=readCsv();
-          int count=0;
 //        System.out.println("Overall Data");
 //           for (StateData state:stateDataLinkedList){
 //              for (CropData cropData:state.cropDataLinkedList){
 ////                  System.out.println("Name :"+cropData.cropName+"\t\t\t District :"+cropData.district);
 //                  count++;
-//                  System.out.println("No: "+count+" -> " +cropData.state);
+//                  System.out.println("No: "+count+" -> " +cropData.state +" year: "+cropData.cropYear);
 //              }
 //          }
 
 //        System.out.println("Crop data for specific state:"+stateName);
 //          queuebase.forwardTraversing();
 
-        System.out.println("Stack");
-         for (StateData stateData:stateDataLinkedList){
-             stateData.countingStack.sortStack();
-             System.out.println("State name: "+stateData.stateName);
-             stateData.countingStack.displayStack();
-         }
-    }
+//        System.out.println("Stack");
+//         for (StateData stateData:stateDataLinkedList) {
+//             stateData.countingStack.sortStack();
+//             System.out.println("State name: " + stateData.stateName);
+//             stateData.countingStack.displayStack();
+//         }
 
+        for (StateData stateData:stateDataLinkedList) {
+            if (stateData.stateName.equalsIgnoreCase(stateName)){
+                 recentOldestCrop(stateData);
+                 break;
+            }
+        }
+
+
+
+
+//        System.out.println(" On year Basis\n\n\n\n\n\n");
+//
+//
+////        2-problem -> Which state is popular for which type of crop?
+////        popularState(stateDataLinkedList);
+//
+//        //Problem 1: How to find the most popular crop in a particular year.
+//        popularStateInParticularYear(stateDataLinkedList,2010);
+
+
+
+
+
+
+
+
+
+
+    }
 
     public static LinkedList<StateData> readCsv() throws IOException {
         int count=1;
@@ -88,7 +117,86 @@ while(!tempcountingStack.isEmpty()){
     countingStack.push(tempcountingStack.popTop());
 }
             }
+
+    public static void popularState(LinkedList<StateData> statelist) {
+        for (StateData stateData:statelist) {
+            Stack stack=stateData.countingStack;
+            stack.sortStack();
+            System.out.println("State name: " + stateData.stateName);
+            stack.displayStack();
+            Node poped=stack.popBottom();
+            int mostcount=poped.count;
+            int count=mostcount;
+            System.out.println("\t\t\t\t\t State popular for following crops: ");
+            while (count==mostcount){
+                System.out.println(poped.cropName+"\t"+poped.count);
+                poped = stack.popBottom();
+                count=poped.count;
+            }
         }
+    }
+
+    public static void popularStateInParticularYear(LinkedList<StateData> statelist,int year) {
+        Stack tempStack = new Stack();
+        for (StateData stateData : statelist) {
+            LinkedList<CropData> cropDataList = stateData.cropDataLinkedList;
+            while (!cropDataList.isEmpty()) {
+                CropData cropData = cropDataList.pop();
+                if (cropData.cropYear == year) {
+                    populateStack(cropData.cropName, tempStack);
+                }
+            }
+            tempStack.sortStack();
+            System.out.println("State name: " + stateData.stateName);
+            tempStack.displayStack();
+            Node poped=tempStack.popBottom();
+            int mostcount=poped.count;
+            int count=mostcount;
+            System.out.println("\t\t\t\t\t State: "+stateData.stateName +"\t Year: "+year);
+            while (count==mostcount){
+                System.out.println(poped.cropName+"\t"+poped.count);
+                poped = tempStack.popBottom();
+                count=poped.count;
+            }
+        }
+    }
+       public static void recentOldestCrop(StateData state){
+          int oldestYear=0, recentYear=0;
+
+          for (CropData crop:state.cropDataLinkedList){
+              if (oldestYear==0){
+                  oldestYear=crop.cropYear;
+              }
+              if (recentYear==0){
+                  recentYear=crop.cropYear;
+              }
+              if (oldestYear< crop.cropYear){
+                  recentYear= crop.cropYear;
+              }
+          }
+           System.out.println("Oldest year: "+oldestYear);
+           System.out.println("Recent year: "+recentYear);
+           String district=null;
+           ArrayList<String> cropoldest=new ArrayList<>();
+           ArrayList<String> croprecent=new ArrayList<>();
+           boolean status=false;
+           for (CropData crop:state.cropDataLinkedList) {
+               if (crop.cropYear == oldestYear) {
+                   cropoldest.add(crop.cropName);
+               }
+               if (crop.cropYear == recentYear) {
+                   croprecent.add(crop.cropName);
+               }
+
+           }
+
+           System.out.println("Oldest: "+ cropoldest);
+           System.out.println("Recent: "+croprecent);
+
+
+
+
+    }
 
 
 
@@ -108,13 +216,6 @@ while(!tempcountingStack.isEmpty()){
 
 
 
-
-
-
-
-
-
-
-
+        }             // Main class Ends up here
 
 

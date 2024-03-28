@@ -57,6 +57,13 @@ public class Stack {
         size++;
     }
 
+
+
+
+
+
+
+
     public int size() {
         return size;
     }
@@ -109,5 +116,20 @@ class Node{
     Node(String data,int count){
         this.cropName=data;
         this.count=count;
+    }
+    Node(String cropName){
+        this.cropName=cropName;
+    }
+}
+class Node2{
+    String cropName;
+    int year;
+    Node next;
+    Node2(String data,int year){
+        this.cropName=data;
+        this.year=year;
+    }
+    Node2(String cropName){
+        this.cropName=cropName;
     }
 }
