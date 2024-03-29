@@ -7,24 +7,22 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Main {
-
     public static String fileName="D:\\3RD SEMESTER\\DSA\\crop_production.csv";
     static String  stateName="Andhra Pradesh";
     static Queue queuebase=new Queue();
     public static void main(String[] args) throws IOException {
            LinkedList<StateData> stateDataLinkedList=readCsv();
 
-
       //Problem 3: Find the most recent and oldest crop of ‘Andhra Pradesh’ state.
-        for (StateData stateData:stateDataLinkedList) {
-            if (stateData.stateName.equalsIgnoreCase(stateName)){
-                 recentOldestCrop(stateData);
-                 break;
-            }
-        }
-
-        //2-problem -> Which state is popular for which type of crop?
-        popularState(stateDataLinkedList);
+//        for (StateData stateData:stateDataLinkedList) {
+//            if (stateData.stateName.equalsIgnoreCase(stateName)){
+//                 recentOldestCrop(stateData);
+//                 break;
+//            }
+//        }
+//
+//        //2-problem -> Which state is popular for which type of crop?
+//        popularState(stateDataLinkedList);
 
         //Problem 1: How to find the most popular crop in a particular year.
         popularStateInParticularYear(stateDataLinkedList,2010);
@@ -115,8 +113,8 @@ while(!tempcountingStack.isEmpty()){
                 }
             }
             tempStack.sortStack();
-            System.out.println("State name: " + stateData.stateName);
-            tempStack.displayStack();
+//            System.out.println("State name: " + stateData.stateName);
+//            tempStack.displayStack();
             Node poped=tempStack.popBottom();
             int mostcount=poped.count;
             int count=mostcount;

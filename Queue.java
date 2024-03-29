@@ -2,7 +2,6 @@ public class Queue {
 
 private NodeCrop head=new NodeCrop(null);  //dummy node
      private int size;
-
      // we cants add nodes as head.next=new node
      // this will lead in every entry the first they will be the recent one
      // but in case it should be the last, so we move back then add.
@@ -92,18 +91,11 @@ private NodeCrop head=new NodeCrop(null);  //dummy node
           }
           return false;
      }
-
      public void isEmpty(){
           if (size==0){
                throw new IllegalStateException("Queue is empty");
           }
      }
-
-
-
-
-
-
 }
 
 class NodeCrop{

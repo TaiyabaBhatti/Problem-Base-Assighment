@@ -2,28 +2,11 @@ public class Stack {
     Node top;
     int size;
 
-    public Object peek() {
-//        if (size==0){
-//            throw new IllegalStateException("LinkedList is empty");
-//        }
-        return 0;
-    }
-
     public Node peekNode() {
         if (size == 0) {
             throw new IllegalStateException("LinkedList is empty");
         }
         return top;
-    }
-
-    public Object pop() {
-//        if (size==0){
-//            throw new IllegalStateException("LinkedList is empty");
-//        }
-//        Node oldtop=top;
-//        top=top.next;
-//        size--;
-        return 0;
     }
 
     public Node popTop() {
@@ -51,18 +34,10 @@ public class Stack {
     }
 
     public void push(Node singleCrop) {
-
         singleCrop.next = top;
         top = singleCrop;
         size++;
     }
-
-
-
-
-
-
-
 
     public int size() {
         return size;
@@ -118,18 +93,6 @@ class Node{
         this.count=count;
     }
     Node(String cropName){
-        this.cropName=cropName;
-    }
-}
-class Node2{
-    String cropName;
-    int year;
-    Node next;
-    Node2(String data,int year){
-        this.cropName=data;
-        this.year=year;
-    }
-    Node2(String cropName){
         this.cropName=cropName;
     }
 }
